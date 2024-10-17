@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Index Page
+{% endblock %}
+
+{% block content %}
+    <h1>Index page</h1>
+    <a href="{{ url_for('lessons.get_all') }}">Lessons</a>
+{% endblock %}

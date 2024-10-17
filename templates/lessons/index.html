@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lessons Page
+{% endblock %}
+
+{% block content %}
+
+
+{% for lesson in lessons %}
+    <div class="card mt-2">
+      <div class="card-header">
+        Урок
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ lesson.title }}</h5>
+        <p class="card-text">Категория: {{ lesson.category }}
+        </p>
+        <p class="card-text">Сложность: {{ lesson.level }}</p>
+        <a href="{{ url_for('lessons.get_by_id', id=lesson.id) }}" class="btn btn-primary">Перейти</a>
+      </div>
+    </div>
+{% endfor %}
+
+
+{% endblock %}
