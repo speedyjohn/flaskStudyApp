@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+Admin Panel Lessons
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Аттрибут</td>
+            <td>Значение</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{{ lesson.id }}</td>
+        </tr>
+        <tr>
+            <td>Название</td>
+            <td>{{ lesson.title }}</td>
+        </tr>
+        <tr>
+            <td>Категория</td>
+            <td>{{ lesson.category }}</td>
+        </tr>
+        <tr>
+            <td>Сложность</td>
+            <td>{{ lesson.level }}</td>
+        </tr>
+        <tr>
+            <td>CRUD</td>
+            <td class="d-flex gap-3">
+                <a href="#"><i class="fa-solid fa-pen"></i></a>
+                <a href="#" class="text-danger"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

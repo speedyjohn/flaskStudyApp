@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+Admin Panel Lessons
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td>Категория</td>
+            <td>Сложность</td>
+            <td>CRUD</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lesson in lessons %}
+        	<tr>
+                <td>{{ lesson.id }}</td>
+                <td>{{ lesson.title }}</td>
+                <td>{{ lesson.category }}</td>
+                <td>{{ lesson.level }}</td>
+                <td class="d-flex gap-3">
+                    <a href="{{ url_for('admin_lessons.get_by_id', id=lesson.id) }}"><i class="fa-solid fa-eye"></i></a>
+                    <a href="#"><i class="fa-solid fa-pen"></i></a>
+                    <a href="#" class="text-danger"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

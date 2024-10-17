@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Admin Panel
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-3">Admin Panel</h1>
+    <div class="row d-flex justify-content-start gap-3">
+        <div class="card mt-3 py-4" style="width: 16rem;">
+          <div class="card-body">
+            <h5 class="card-title">Уроки</h5>
+            <p class="card-text">Здесь можно управлять уроками</p>
+          </div>
+          <div class="card-body">
+            <a href="{{ url_for("admin_lessons.get_all") }}" class="btn btn-danger w-50">Go</a>
+          </div>
+        </div>
+    </div>
+{% endblock %}
