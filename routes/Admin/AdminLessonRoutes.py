@@ -10,6 +10,7 @@ class AdminLessonRoutes:
         self.bp.add_url_rule("/admin/lessons/", view_func=self.get_all)
         self.bp.add_url_rule("/admin/lessons/<int:id>/", view_func=self.get_by_id)
         self.bp.add_url_rule("/admin/lessons/create/", view_func=self.create, methods=["POST", "GET"])
+        self.bp.add_url_rule("/admin/lessons/edit/<int:id>", view_func=self.edit, methods=["POST", "GET"])
 
     def get_all(self):
         lessons = Lesson.query.all()
@@ -32,8 +33,16 @@ class AdminLessonRoutes:
             db.session.commit()
             return redirect("/")
 
-    def edit(self):
-        pass
+    def edit(self, id):
+        lesson = Lesson.query.get(id)
+        if request.method == "GET":
+            return render_template("admin/lessons/edit.html", lesson=lesson)
+        else:
+            lesson.title = request.form["title"]
+            lesson.category = request.form["category"]
+            lesson.level = request.form["level"]
+            db.session.commit()
+            return redirect("/admin/lessons/")
 
     def update(self):
         pass
