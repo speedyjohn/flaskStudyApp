@@ -32,26 +32,27 @@ Create Lesson
                 <option value="5">5</option>
             </select>
         </div>
-        <button type="button" class="btn btn-primary" onclick="send()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="sendLesson()">Submit</button>
     </form>
-    <script>
-        function send() {
-            const formData = new FormData(document.getElementById("form"));
-            const data = Object.fromEntries(formData.entries());
-            const url = "{{ url_for('admin_lessons.edit', id=lesson.id) }}";
-            fetch(url, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(response => {
+<script>
+    function sendLesson() {
+        const formData = new FormData(document.getElementById("form"));
+        const data = Object.fromEntries(formData.entries());
+        data["id"] = {{ lesson.id }};
+        const url = "{{ url_for('admin_lessons.update') }}";
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
             if (response.ok) {
                 window.location.href = '/admin/lessons';
             } else {
                 alert('Ошибка при обновлении');
             }
         });
-        }
-    </script>
+    }
+</script>
 {% endblock %}

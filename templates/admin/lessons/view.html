@@ -5,37 +5,56 @@ Admin Panel Lessons
 {% endblock %}
 
 {% block content %}
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <td>Аттрибут</td>
-            <td>Значение</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>ID</td>
-            <td>{{ lesson.id }}</td>
-        </tr>
-        <tr>
-            <td>Название</td>
-            <td>{{ lesson.title }}</td>
-        </tr>
-        <tr>
-            <td>Категория</td>
-            <td>{{ lesson.category }}</td>
-        </tr>
-        <tr>
-            <td>Сложность</td>
-            <td>{{ lesson.level }}</td>
-        </tr>
-        <tr>
-            <td>CRUD</td>
-            <td class="d-flex gap-3">
-                <a href="#"><i class="fa-solid fa-pen"></i></a>
-                <a href="#" class="text-danger"><i class="fa-solid fa-trash"></i></a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Аттрибут</td>
+                <td>Значение</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td>{{ lesson.id }}</td>
+            </tr>
+            <tr>
+                <td>Название</td>
+                <td>{{ lesson.title }}</td>
+            </tr>
+            <tr>
+                <td>Категория</td>
+                <td>{{ lesson.category }}</td>
+            </tr>
+            <tr>
+                <td>Сложность</td>
+                <td>{{ lesson.level }}</td>
+            </tr>
+            <tr>
+                <td>CRUD</td>
+                <td class="d-flex gap-3">
+                    <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
+                    <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function deleteLesson(id) {
+            url = "{{ url_for('admin_lessons.delete', id='123') }}".replace("123", id);
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) {
+                    alert("Row deleted");
+                    window.location.href = '/admin/lessons';
+                } else {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
 {% endblock %}

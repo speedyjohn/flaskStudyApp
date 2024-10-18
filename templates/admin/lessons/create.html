@@ -5,7 +5,7 @@ Create Lesson
 {% endblock %}
 
 {% block content %}
-    <form method="POST" class="form form-action w-50 card py-5 px-3">
+    <form action="{{ url_for('admin_lessons.insert') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
         <div class="mb-3 form-group">
             <label for="title" class="form-label">Название</label>
             <input type="text" name="title" id="title" class="form-control" required>
