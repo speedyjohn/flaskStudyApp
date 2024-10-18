@@ -5,7 +5,7 @@ Create Lesson
 {% endblock %}
 
 {% block content %}
-    <form method="POST" class="form form-action w-50 card py-5 px-3">
+    <form class="form form-action w-50 card py-5 px-3" id="form">
         <div class="mb-3 form-group">
             <label for="title" class="form-label">Название</label>
             <input type="text" name="title" id="title" class="form-control" value="{{ lesson.title }}" required>
@@ -32,6 +32,26 @@ Create Lesson
                 <option value="5">5</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="send()">Submit</button>
     </form>
+    <script>
+        function send() {
+            const formData = new FormData(document.getElementById("form"));
+            const data = Object.fromEntries(formData.entries());
+            const url = "{{ url_for('admin_lessons.edit', id=lesson.id) }}";
+            fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+            if (response.ok) {
+                window.location.href = '/admin/lessons';
+            } else {
+                alert('Ошибка при обновлении');
+            }
+        });
+        }
+    </script>
 {% endblock %}
