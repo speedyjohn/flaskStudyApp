@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, jsonify
 
-from app.models import Lesson, db
+from app.models import Lesson, db, Category, Level
+from app.utils import count_rows
 
 
 class AdminLessonRoutes:
@@ -25,14 +26,16 @@ class AdminLessonRoutes:
         return render_template(f"{self.prefix}view.html", lesson=lesson)
 
     def create(self):
-        return render_template(f"{self.prefix}create.html")
+        categories = Category.query.all()
+        levels = Level.query.all()
+        return render_template(f"{self.prefix}create.html", categories=categories, levels=levels)
 
     def insert(self):
         title = request.form["title"]
         category = request.form["category"]
         level = request.form["level"]
 
-        new_lesson = Lesson(title=title, category=category, level=level)
+        new_lesson = Lesson(title=title, category_id=category, level_id=level)
         db.session.add(new_lesson)
         db.session.commit()
         return redirect(self.prefix)

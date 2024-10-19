@@ -1,40 +1,40 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-    <a href="{{ url_for('admin_lessons.create') }}" class="btn btn-danger mb-2 w-25">Создать</a>
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
             <p class="fs-3 fw-bold">Уроки</p>
+            <a href="{{ url_for('admin_lessons.create') }}" class="btn btn-danger mb-2 w-25">Создать</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Название</td>
-                <td>Категория</td>
-                <td>Сложность</td>
-                <td>CRUD</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for lesson in lessons %}
-                <tr>
-                    <td>{{ lesson.id }}</td>
-                    <td>{{ lesson.title }}</td>
-                    <td>{{ lesson.category }}</td>
-                    <td>{{ lesson.level }}</td>
-                    <td class="d-flex gap-1">
-                        <a href="{{ url_for('admin_lessons.get', id=lesson.id) }}"><i class="fa-solid fa-eye"></i></a>
-                        <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
-                        <button class="text-danger border-0 bg-transparent" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                </tr>
-            {% endfor %}
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Название</td>
+                            <td>Категория</td>
+                            <td>Сложность</td>
+                            <td>CRUD</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lesson in lessons %}
+                            <tr>
+                                <td>{{ lesson.id }}</td>
+                                <td>{{ lesson.title }}</td>
+                                <td>ID: {{ lesson.category.id }} - {{ lesson.category.title }}</td>
+                                <td>ID: {{ lesson.level.id }} - {{ lesson.level.title }}</td>
+                                <td class="d-flex gap-1">
+                                    <a href="{{ url_for('admin_lessons.get', id=lesson.id) }}"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                    <button class="text-danger border-0 bg-transparent" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@ from flask import Flask
 
 from app.blueprints import register_blueprints
 from app.models import db
+from app.utils import count_rows
 
 
 def create_app():
@@ -17,5 +18,10 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
+    @app.context_processor
+    def inject_counts():
+        counts = count_rows()
+        return counts
 
     return app
