@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <a href="{{ url_for('admin_categories.create') }}" class="btn btn-danger mb-2 w-25">Создать</a>
+    <div class="card">
+        <div class="card-header">
+            <p class="fs-3 fw-bold">Категории</p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Название</td>
+                            <td>CRUD</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                            <tr>
+                                <td>{{ category.id }}</td>
+                                <td>{{ category.title }}</td>
+                                <td class="d-flex gap-1">
+                                    <a href="{{ url_for('admin_categories.get', id=category.id) }}"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ url_for('admin_categories.edit', id=category.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                    <button class="text-danger border-0 bg-transparent" onclick="deleteCat({{ category.id }})"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteCat(id) {
+            url = "{{ url_for('admin_categories.delete', id='123') }}".replace("123", id);
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) {
+                    alert("Row deleted");
+                    window.location.href = '/admin/categories';
+                } else {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+
+{% endblock %}

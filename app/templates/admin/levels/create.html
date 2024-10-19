@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <form action="{{ url_for('admin_levels.insert') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+        <div class="mb-3 form-group">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" name="title" id="title" class="form-control" required>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="indicator" class="form-label">Показатель</label>
+            <input type="number" name="indicator" id="indicator" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+{% endblock %}

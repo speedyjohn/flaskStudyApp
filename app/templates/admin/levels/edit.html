@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <form class="form form-action w-50 card py-5 px-3" id="form">
+        <div class="mb-3 form-group">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{ level.title }}" required>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="indicator" class="form-label">Показатель</label>
+            <input type="text" name="indicator" id="indicator" class="form-control" value="{{ level.indicator }}" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendLevel()">Submit</button>
+    </form>
+<script>
+    function sendLevel() {
+        const formData = new FormData(document.getElementById("form"));
+        const data = Object.fromEntries(formData.entries());
+        data["id"] = {{ level.id }};
+        const url = "{{ url_for('admin_levels.update') }}";
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/admin/levels';
+            } else {
+                alert('Ошибка при обновлении');
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <form action="{{ url_for('admin_lessons.insert') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+        <div class="mb-3 form-group">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" name="title" id="title" class="form-control" required>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="category" class="form-label">Категория</label>
+            <select class="form-select" name="category" id="category" required>
+                <option value="все">Все</option>
+                <option value="существительные">Существительные</option>
+                <option value="глаголы">Глаголы</option>
+                <option value="прилагательные">Прилагательные</option>
+                <option value="фразы">Фразы</option>
+            </select>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="level" class="form-label">Сложность</label>
+            <select class="form-select" name="level" id="level" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
