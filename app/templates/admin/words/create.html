@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <form action="{{ url_for('admin_words.insert') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+        <div class="mb-3 form-group" id="wordContainer">
+            <label for="word" class="form-label">Слово</label>
+            <input type="text" name="word" id="word" class="form-control" required>
+        </div>
+        <div class="mb-3 form-group" id="translationContainer">
+            <label for="translation" class="form-label">Перевод</label>
+            <input type="text" name="translation" id="translation" class="form-control" required>
+        </div>
+        <div class="mb-3 form-group">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="manyLines" name="many_lines">
+                <label class="form-check-label" for="manyLines">Множественный ввод</label>
+            </div>
+        </div>
+        <div class="mb-3 form-group d-none" id="wordsContainer">
+            <label class="form-check-label" for="words">Множественный ввод</label>
+            <textarea class="form-control" id="words" name="words" rows="3" placeholder="слово-перевод"></textarea>
+        </div>
+        <div class="mb-3 form-group">
+            <label for="lesson" class="form-label">Урок</label>
+            <select class="form-select" name="lesson" id="lesson" required>
+                {% for lesson in lessons %}
+                    <option value="{{ lesson.id }}">ID: {{ lesson.id }} - {{ lesson.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+    <script>
+        const checkbox = document.getElementById("manyLines");
+        const wordContainer = document.getElementById("wordContainer");
+        const translationContainer = document.getElementById("translationContainer");
+        const wordsAreaContainer = document.getElementById("wordsContainer");
+        const word = document.getElementById("word");
+        const translation = document.getElementById("translation");
+        const wordsArea = document.getElementById("words");
+        checkbox.addEventListener("click", () => {
+        if(!checkbox.checked) {
+            console.log("Uncheck");
+            wordsAreaContainer.classList.add("d-none");
+            wordContainer.classList.remove("d-none");
+            translationContainer.classList.remove("d-none");
+            wordsArea.removeAttribute("required");
+            word.setAttribute("required", true)
+            translation.setAttribute("required", true)
+        } else {
+            console.log("Check")
+            wordsAreaContainer.classList.remove("d-none")
+            wordContainer.classList.add("d-none");
+            translationContainer.classList.add("d-none");
+            wordsArea.setAttribute("required", true)
+            word.removeAttribute("required");
+            translation.removeAttribute("required")
+        }
+        });
+    </script>
+{% endblock %}

@@ -9,23 +9,19 @@
         <div class="mb-3 form-group">
             <label for="category" class="form-label">Категория</label>
             <select class="form-select" name="category" id="category" required>
-                <option value="{{ lesson.category }}" selected>{{ lesson.category }}</option>
-                <option value="все">Все</option>
-                <option value="существительные">Существительные</option>
-                <option value="глаголы">Глаголы</option>
-                <option value="прилагательные">Прилагательные</option>
-                <option value="фразы">Фразы</option>
+                <option value="{{ lesson.category.id }}" selected>{{ lesson.category.title }}</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>
+                {% endfor %}
             </select>
         </div>
         <div class="mb-3 form-group">
             <label for="level" class="form-label">Сложность</label>
             <select class="form-select" name="level" id="level" required>
-                <option value="{{ lesson.level }}" selected>{{ lesson.level }}</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option value="{{ lesson.level.id }}" selected>{{ lesson.level.title }}: {{ level.indicator }}</option>
+                {% for level in levels %}
+                    <option value="{{ level.id }}">{{ level.title }}: {{ level.indicator }}</option>
+                {% endfor %}
             </select>
         </div>
         <button type="button" class="btn btn-primary" onclick="sendLesson()">Submit</button>

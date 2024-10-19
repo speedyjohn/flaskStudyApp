@@ -3,7 +3,7 @@
 {% block content %}
     <div class="card">
         <div class="card-header">
-            <p class="fs-3">{{ level.title }}</p>
+            <p class="fs-3">{{ word.title }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -17,21 +17,25 @@
                     <tbody>
                         <tr>
                             <td>ID</td>
-                            <td>{{ level.id }}</td>
+                            <td>{{ word.id }}</td>
                         </tr>
                         <tr>
-                            <td>Название</td>
-                            <td>{{ level.title }}</td>
+                            <td>Слово</td>
+                            <td>{{ word.word }}</td>
                         </tr>
                         <tr>
-                            <td>Показатель</td>
-                            <td>{{ level.indicator }}</td>
+                            <td>Перевод</td>
+                            <td>{{ word.translation }}</td>
+                        </tr>
+                        <tr>
+                            <td>Урок</td>
+                            <td><a href="{{ url_for('admin_lessons.get', id=word.lesson.id) }}">ID: {{ word.lesson.id }} - {{ word.lesson.title }}</a></td>
                         </tr>
                         <tr>
                             <td>CRUD</td>
                             <td class="d-flex gap-3">
-                                <a href="{{ url_for('admin_levels.edit', id=level.id) }}"><i class="fa-solid fa-pen"></i></a>
-                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLevel({{ level.id }})"><i class="fa-solid fa-trash"></i></button>
+                                <a href="{{ url_for('admin_words.edit', id=word.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteWord({{ word.id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -41,8 +45,8 @@
     </div>
 
     <script>
-        function deleteLevel(id) {
-            url = "{{ url_for('admin_levels.delete', id='123') }}".replace("123", id);
+        function deleteWord(id) {
+            url = "{{ url_for('admin_categories.delete', id='123') }}".replace("123", id);
             fetch(url, {
                 method: "DELETE",
                 headers: {
@@ -51,7 +55,7 @@
             }).then(response => {
                 if(response.ok) {
                     alert("Row deleted");
-                    window.location.href = '/admin/levels';
+                    window.location.href = '/admin/words';
                 } else {
                     alert("Error");
                 }

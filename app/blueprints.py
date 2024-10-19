@@ -4,6 +4,7 @@ from app.routes.Admin.AdminCategoryRoutes import AdminCategoryRoutes
 from app.routes.Admin.AdminLevelRoutes import AdminLevelRoutes
 from app.routes.Admin.AdminLessonRoutes import AdminLessonRoutes
 from app.routes.Admin.AdminRoutes import AdminRoutes
+from app.routes.Admin.AdminWordsRoutes import AdminWordRoutes
 from app.routes.Main.LessonRoutes import LessonRoutes
 from app.routes.Main.MainRoutes import MainRoutes
 
@@ -13,6 +14,7 @@ def register_blueprints(app: Flask):
     admin_lessons_bp = Blueprint("admin_lessons", __name__)
     admin_categories_bp = Blueprint("admin_categories", __name__)
     admin_levels_bp = Blueprint("admin_levels", __name__)
+    admin_words_bp = Blueprint("admin_words", __name__)
 
     main_bp = Blueprint("main", __name__)
     lesson_bp = Blueprint("lessons", __name__)
@@ -21,6 +23,7 @@ def register_blueprints(app: Flask):
     admin_lesson_routes = AdminLessonRoutes(admin_lessons_bp)
     admin_categories_routes = AdminCategoryRoutes(admin_categories_bp)
     admin_levels_routes = AdminLevelRoutes(admin_levels_bp)
+    admin_words_routes = AdminWordRoutes(admin_words_bp)
 
     main_routes = MainRoutes(main_bp)
     lesson_routes = LessonRoutes(lesson_bp)
@@ -29,6 +32,7 @@ def register_blueprints(app: Flask):
     app.register_blueprint(admin_lesson_routes.bp)
     app.register_blueprint(admin_categories_routes.bp)
     app.register_blueprint(admin_levels_routes.bp)
+    app.register_blueprint(admin_words_routes.bp)
 
     app.register_blueprint(main_routes.bp)
     app.register_blueprint(lesson_routes.bp)

@@ -25,11 +25,11 @@
             </tr>
             <tr>
                 <td>Категория</td>
-                <td>{{ lesson.category }}</td>
+                <td><a href="{{ url_for('admin_categories.get', id=lesson.category.id) }}">ID: {{ lesson.category.id }} - {{ lesson.category.title }}</a></td>
             </tr>
             <tr>
                 <td>Сложность</td>
-                <td>{{ lesson.level }}</td>
+                <td><a href="{{ url_for('admin_levels.get', id=lesson.level.id) }}">ID: {{ lesson.level.id }} - {{ lesson.level.title }}</a></td>
             </tr>
             <tr>
                 <td>CRUD</td>

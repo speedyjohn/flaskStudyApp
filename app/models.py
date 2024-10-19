@@ -23,3 +23,13 @@ class Level(db.Model):
     title = db.Column(db.String(255), nullable=False)
     indicator = db.Column(db.Integer)
 
+
+class Word(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    word = db.Column(db.String(255), nullable=False)
+    translation = db.Column(db.String(255), nullable=False)
+    lesson_id = db.Column(db.Integer, db.ForeignKey("lesson.id"), nullable=False)
+
+    lesson = db.relationship("Lesson", backref=db.backref("words", lazy=True))
+
+

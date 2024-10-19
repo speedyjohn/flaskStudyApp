@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, jsonify
 
 from app.models import Lesson, db, Category, Level
-from app.utils import count_rows
 
 
 class AdminLessonRoutes:
@@ -42,7 +41,9 @@ class AdminLessonRoutes:
 
     def edit(self, id):
         lesson = Lesson.query.get(id)
-        return render_template(f"{self.prefix}edit.html", lesson=lesson)
+        categories = Category.query.all()
+        levels = Level.query.all()
+        return render_template(f"{self.prefix}edit.html", lesson=lesson, categories=categories, levels=levels)
 
     def update(self):
         if request.method == "PUT":
@@ -50,10 +51,9 @@ class AdminLessonRoutes:
             id = data.get("id")
             lesson = Lesson.query.get(id)
             lesson.title = data.get("title")
-            lesson.category = data.get("category")
-            lesson.level = data.get("level")
+            lesson.category_id = data.get("category")
+            lesson.level_id = data.get("level")
             db.session.commit()
-            print(data)
             return jsonify({"success": True}), 204
 
     def delete(self, id):

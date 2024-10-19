@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <form class="form form-action w-50 card py-5 px-3" id="form">
+        <div class="mb-3 form-group">
+            <label for="word" class="form-label">Слово</label>
+            <input type="text" name="word" id="word" class="form-control" required value="{{ word.word }}">
+        </div>
+        <div class="mb-3 form-group">
+            <label for="translation" class="form-label">Перевод</label>
+            <input type="text" name="translation" id="translation" class="form-control" required value="{{ word.translation }}">
+        </div>
+        <div class="mb-3 form-group">
+            <label for="lesson" class="form-label">Сложность</label>
+            <select class="form-select" name="lesson" id="lesson" required>
+                <option value="{{ word.lesson.id }}" selected>ID: {{ word.lesson.id }} - {{ word.lesson.title }}</option>
+                {% for lesson in lessons %}
+                    <option value="{{ lesson.id }}">ID: {{ lesson.id }} - {{ lesson.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="sendWord()">Submit</button>
+    </form>
+<script>
+    function sendWord() {
+        const formData = new FormData(document.getElementById("form"));
+        const data = Object.fromEntries(formData.entries());
+        data["id"] = {{ word.id }};
+        const url = "{{ url_for('admin_words.update') }}";
+        fetch(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = '/admin/words';
+            } else {
+                alert('Ошибка при обновлении');
+            }
+        });
+    }
+</script>
+{% endblock %}

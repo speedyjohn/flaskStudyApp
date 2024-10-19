@@ -1,0 +1,60 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <p class="fs-3 fw-bold">Слова</p>
+            <a href="{{ url_for('admin_words.create') }}" class="btn btn-danger mb-2 w-25">Создать</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Название</td>
+                            <td>Показатель</td>
+                            <td>Урок</td>
+                            <td>CRUD</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for word in words %}
+                            <tr>
+                                <td>{{ word.id }}</td>
+                                <td>{{ word.word }}</td>
+                                <td>{{ word.translation }}</td>
+                                <td><a href="{{ url_for('admin_lessons.get', id=word.lesson.id) }}">ID: {{ word.lesson.id }} - {{ word.lesson.title }}</a></td>
+                                <td class="d-flex gap-1">
+                                    <a href="{{ url_for('admin_words.get', id=word.id) }}"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ url_for('admin_words.edit', id=word.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                    <button class="text-danger border-0 bg-transparent" onclick="deleteLevel({{ word.id }})"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function deleteLevel(id) {
+            url = "{{ url_for('admin_words.delete', id='123') }}".replace("123", id);
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if(response.ok) {
+                    alert("Row deleted");
+                    window.location.href = '/admin/words';
+                } else {
+                    alert("Error");
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
