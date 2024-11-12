@@ -1,50 +1,41 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-    <form class="form form-action w-50 card py-5 px-3" id="form">
+    <form class="form form-action w-50 card py-5 px-3" id="form" method="POST">
+        {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
-            <label for="title" class="form-label">Название</label>
-            <input type="text" name="title" id="title" class="form-control" value="{{ lesson.title }}" required>
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control", value=lesson.title) }}
+            {% if form.title.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.title.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group">
-            <label for="category" class="form-label">Категория</label>
-            <select class="form-select" name="category" id="category" required>
-                <option value="{{ lesson.category.id }}" selected>{{ lesson.category.title }}</option>
-                {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.title }}</option>
-                {% endfor %}
-            </select>
+            {{ form.category.label(class="form-label") }}
+            {{ form.category(class="form-select") }}
+            {% if form.category.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.category.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group">
-            <label for="level" class="form-label">Сложность</label>
-            <select class="form-select" name="level" id="level" required>
-                <option value="{{ lesson.level.id }}" selected>{{ lesson.level.title }}: {{ level.indicator }}</option>
-                {% for level in levels %}
-                    <option value="{{ level.id }}">{{ level.title }}: {{ level.indicator }}</option>
-                {% endfor %}
-            </select>
+            {{ form.level.label(class="form-label") }}
+            {{ form.level(class="form-select") }}
+            {% if form.level.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.level.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        <button type="button" class="btn btn-primary" onclick="sendLesson()">Submit</button>
+        {{ form.submit(class="btn btn-primary") }}
     </form>
-<script>
-    function sendLesson() {
-        const formData = new FormData(document.getElementById("form"));
-        const data = Object.fromEntries(formData.entries());
-        data["id"] = {{ lesson.id }};
-        const url = "{{ url_for('admin_lessons.update') }}";
-        fetch(url, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        }).then(response => {
-            if (response.ok) {
-                window.location.href = '/admin/lessons';
-            } else {
-                alert('Ошибка при обновлении');
-            }
-        });
-    }
-</script>
 {% endblock %}

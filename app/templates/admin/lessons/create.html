@@ -1,27 +1,41 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-    <form action="{{ url_for('admin_lessons.insert') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+    <form action="{{ url_for('admin_lessons.create') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+        {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
-            <label for="title" class="form-label">Название</label>
-            <input type="text" name="title" id="title" class="form-control" required>
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+            {% if form.title.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.title.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group">
-            <label for="category" class="form-label">Категория</label>
-            <select class="form-select" name="category" id="category" required>
-                {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.title }}</option>
-                {% endfor %}
-            </select>
+            {{ form.category.label(class="form-label") }}
+            {{ form.category(class="form-select") }}
+            {% if form.category.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.category.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group">
-            <label for="level" class="form-label">Сложность</label>
-            <select class="form-select" name="level" id="level" required>
-                {% for level in levels %}
-                    <option value="{{ level.id }}">{{ level.title }}: {{ level.indicator }}</option>
-                {% endfor %}
-            </select>
+            {{ form.level.label(class="form-label") }}
+            {{ form.level(class="form-select") }}
+            {% if form.level.errors %}
+                <div class="p-2 text-light bg-danger rounded-3">
+                    {% for error in form.level.errors %}
+                        <p class="m-0 p-0">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        {{ form.submit(class="btn btn-primary") }}
     </form>
 {% endblock %}

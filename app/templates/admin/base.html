@@ -12,12 +12,12 @@
 
     <!-- Font Family -->
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="{{ url_for('static', filename='assets/app-22784e3d.js') }}"></script>
-  <script type="module" crossorigin src="{{ url_for('static', filename='assets/apexcharts.common-a0fc19b4.js') }}"></script>
-  <script type="module" crossorigin src="{{ url_for('static', filename='assets/world-7ff4c208.js') }}"></script>
-  <script type="module" crossorigin src="{{ url_for('static', filename='assets/dashboard.init-69152f8b.js') }}"></script>
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/app-0f19a312.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/world-bcd2ab8c.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/app-0f19a312.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/world-bcd2ab8c.css') }}">
+    <script type="module" crossorigin src="{{ url_for('static', filename='assets/app-22784e3d.js') }}"></script>
+    <script type="module" crossorigin src="{{ url_for('static', filename='assets/apexcharts.common-a0fc19b4.js') }}"></script>
+    <script type="module" crossorigin src="{{ url_for('static', filename='assets/world-7ff4c208.js') }}"></script>
+    <script type="module" crossorigin src="{{ url_for('static', filename='assets/dashboard.init-69152f8b.js') }}"></script>
 </head>
 
 <body>
@@ -28,6 +28,7 @@
     {% include 'admin/partials/sidebar.html' %}
 
     <div class="content-page px-2">
+    <button class="button-toggle-menu mb-3"><i class="fa-solid fa-bars"></i></button>
         {% block content %}{% endblock %}
     </div> <!-- content -->
 

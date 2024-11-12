@@ -6,11 +6,10 @@ from app.utils import count_rows
 
 
 def create_app():
-    # Создаем экземпляр Flask с измененными путями к статике и шаблонам
     app = Flask(__name__, static_folder="static", template_folder="templates")
 
-    # Настройка SQLAlchemy
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///db.db"
+    app.config["SECRET_KEY"] = "veryhardsecretkey"
 
     register_blueprints(app)
 
