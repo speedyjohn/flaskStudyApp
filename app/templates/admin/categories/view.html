@@ -3,7 +3,8 @@
 {% block content %}
     <div class="card">
         <div class="card-header">
-            <p class="fs-3">{{ category.title }}</p>
+            <a href="{{ url_for('admin_categories.get_all') }}" class="fs-4">Все категории</a>
+            <p class="fs-3 mt-3">{{ category.title }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
