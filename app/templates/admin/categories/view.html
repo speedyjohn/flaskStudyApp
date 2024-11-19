@@ -8,30 +8,30 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped">
-        <thead>
-            <tr>
-                <td>Аттрибут</td>
-                <td>Значение</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>ID</td>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <td>Название</td>
-                <td>{{ category.title }}</td>
-            </tr>
-            <tr>
-                <td>CRUD</td>
-                <td class="d-flex gap-3">
-                    <a href="{{ url_for('admin_categories.edit', id=category.id) }}"><i class="fa-solid fa-pen"></i></a>
-                    <button class="text-danger border-0 bg-transparent p-0" onclick="deleteCat({{ category.id }})"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <thead>
+                        <tr>
+                            <td>Аттрибут</td>
+                            <td>Значение</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{ category.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Название</td>
+                            <td>{{ category.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>CRUD</td>
+                            <td class="d-flex gap-3">
+                                <a href="{{ url_for('admin_categories.edit', id=category.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteCat({{ category.id }})"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

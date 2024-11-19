@@ -1,12 +1,12 @@
 from wtforms import ValidationError
 
-from app.models import Category, Level
+from app.models import Category, Level, Lesson
 
 
 class CategoryExists:
     def __init__(self, message=None):
         if message is None:
-            message = "Выберите действительную категорию"
+            message = "Выберите действительную категорию."
         self.message = message
 
     def __call__(self, form, field):
@@ -18,12 +18,24 @@ class CategoryExists:
 class LevelExists:
     def __init__(self, message=None):
         if message is None:
-            message = 'Выберите действительную категорию'
+            message = 'Выберите действительную сложность.'
         self.message = message
 
     def __call__(self, form, field):
         level_id = field.data
         if not Level.query.get(level_id):
+            raise ValidationError(self.message)
+
+
+class LessonExists:
+    def __init__(self, message=None):
+        if message is None:
+            message = "Выберите действительный урок."
+        self.message = message
+
+    def __call__(self, form, field):
+        lesson_id = field.data
+        if not Lesson.query.get(lesson_id):
             raise ValidationError(self.message)
 
 

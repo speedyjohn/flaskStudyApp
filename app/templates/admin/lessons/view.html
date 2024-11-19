@@ -8,38 +8,38 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped">
-        <thead>
-            <tr>
-                <td>Аттрибут</td>
-                <td>Значение</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>ID</td>
-                <td>{{ lesson.id }}</td>
-            </tr>
-            <tr>
-                <td>Название</td>
-                <td>{{ lesson.title }}</td>
-            </tr>
-            <tr>
-                <td>Категория</td>
-                <td><a href="{{ url_for('admin_categories.get', id=lesson.category.id) }}">ID: {{ lesson.category.id }} - {{ lesson.category.title }}</a></td>
-            </tr>
-            <tr>
-                <td>Сложность</td>
-                <td><a href="{{ url_for('admin_levels.get', id=lesson.level.id) }}">ID: {{ lesson.level.id }} - {{ lesson.level.title }}</a></td>
-            </tr>
-            <tr>
-                <td>CRUD</td>
-                <td class="d-flex gap-3">
-                    <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
-                    <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <thead>
+                        <tr>
+                            <td>Аттрибут</td>
+                            <td>Значение</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{ lesson.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Название</td>
+                            <td>{{ lesson.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Категория</td>
+                            <td><a href="{{ url_for('admin_categories.get', id=lesson.category.id) }}">ID: {{ lesson.category.id }} - {{ lesson.category.title }}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Сложность</td>
+                            <td><a href="{{ url_for('admin_levels.get', id=lesson.level.id) }}">ID: {{ lesson.level.id }} - {{ lesson.level.title }}</a></td>
+                        </tr>
+                        <tr>
+                            <td>CRUD</td>
+                            <td class="d-flex gap-3">
+                                <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
