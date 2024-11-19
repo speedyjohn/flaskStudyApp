@@ -27,7 +27,7 @@ class AdminCategoryRoutes:
         form = CategoryForm()
         if form.validate_on_submit():
             title = request.form["title"]
-
+            ###
             category = Category(title=title)
             db.session.add(category)
             db.session.commit()
