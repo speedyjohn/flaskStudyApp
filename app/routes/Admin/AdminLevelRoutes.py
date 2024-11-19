@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, jsonify
 
+from app.forms.forms import LevelForm
 from app.models import Level, db
 
 
@@ -10,10 +11,8 @@ class AdminLevelRoutes:
 
         self.bp.add_url_rule(f"{self.prefix}", view_func=self.get_all)
         self.bp.add_url_rule(f"{self.prefix}<int:id>/", view_func=self.get)
-        self.bp.add_url_rule(f"{self.prefix}create/", view_func=self.create)
-        self.bp.add_url_rule(f"{self.prefix}insert/", view_func=self.insert, methods=["POST"])
-        self.bp.add_url_rule(f"{self.prefix}edit/<int:id>", view_func=self.edit)
-        self.bp.add_url_rule(f"{self.prefix}update/", view_func=self.update, methods=["PUT"])
+        self.bp.add_url_rule(f"{self.prefix}create/", view_func=self.create, methods=["GET", "POST"])
+        self.bp.add_url_rule(f"{self.prefix}edit/<int:id>", view_func=self.edit, methods=["GET", "POST"])
         self.bp.add_url_rule(f"{self.prefix}delete/<int:id>", view_func=self.delete, methods=["DELETE"])
 
     def get_all(self):
@@ -25,31 +24,27 @@ class AdminLevelRoutes:
         return render_template(f"{self.prefix}view.html", level=level)
 
     def create(self):
-        return render_template(f"{self.prefix}create.html")
+        form = LevelForm()
+        if form.validate_on_submit():
+            title = request.form["title"]
+            indicator = request.form["indicator"]
+            level = Level(title=title, indicator=indicator)
+            db.session.add(level)
+            db.session.commit()
+            return redirect(self.prefix)
 
-    def insert(self):
-        title = request.form["title"]
-        indicator = request.form["indicator"]
-
-        new_level = Level(title=title, indicator=indicator)
-        db.session.add(new_level)
-        db.session.commit()
-        return redirect(self.prefix)
+        return render_template(f"{self.prefix}create.html", form=form)
 
     def edit(self, id):
         level = Level.query.get(id)
-        return render_template(f"{self.prefix}edit.html", level=level)
-
-    def update(self):
-        if request.method == "PUT":
-            data = request.json
-            id = data.get("id")
-            level = Level.query.get(id)
-            level.title = data.get("title")
-            level.indicator = data.get("indicator")
+        form = LevelForm()
+        if form.validate_on_submit():
+            level.title = request.form["title"]
+            level.indicator = request.form["indicator"]
             db.session.commit()
-            print(data)
-            return jsonify({"success": True}), 204
+            return redirect(f"{self.prefix}{id}")
+        return render_template(f"{self.prefix}edit.html", level=level, form=form)
+
 
     def delete(self, id):
         if request.method == "DELETE":

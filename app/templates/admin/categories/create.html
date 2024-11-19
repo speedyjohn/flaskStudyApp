@@ -1,7 +1,7 @@
 {% extends "admin/base.html" %}
 
 {% block content %}
-    <form action="{{ url_for('admin_categories.create') }}"  method="POST" class="form form-action w-50 card py-5 px-3">
+    <form action="{{ url_for('admin_categories.create') }}" method="POST" class="form form-action w-50 card py-5 px-3">
         {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
             {{ form.title.label(class="form-label") }}
