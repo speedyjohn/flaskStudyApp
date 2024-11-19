@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, SubmitField
 from wtforms.fields.numeric import IntegerField
+from wtforms.fields.simple import BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 from app.forms.validators import CategoryExists, LevelExists, EqualToText, LessonExists
@@ -26,6 +27,8 @@ class LevelForm(BaseForm):
 
 
 class WordForm(BaseForm):
-    word = StringField("Слово", validators=[DataRequired(), Length(min=0, max=40)])
-    translate = StringField("Перевод", validators=[DataRequired(), Length(min=0, max=40)])
+    word = StringField("Слово", validators=[Length(min=0, max=40)])
+    translation = StringField("Перевод", validators=[Length(min=0, max=40)])
     lesson = SelectField("Урок", validators=[DataRequired(), LessonExists()])
+    many_rows = BooleanField("Множественный ввод", validators=[])
+    words = TextAreaField("Множественный ввод", validators=[])
