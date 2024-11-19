@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, jsonify
 
+from app.forms.forms import CategoryForm
 from app.models import db, Category
 
 
@@ -10,10 +11,8 @@ class AdminCategoryRoutes:
 
         self.bp.add_url_rule(f"{self.prefix}", view_func=self.get_all)
         self.bp.add_url_rule(f"{self.prefix}<int:id>/", view_func=self.get)
-        self.bp.add_url_rule(f"{self.prefix}create/", view_func=self.create)
-        self.bp.add_url_rule(f"{self.prefix}insert/", view_func=self.insert, methods=["POST"])
-        self.bp.add_url_rule(f"{self.prefix}edit/<int:id>", view_func=self.edit)
-        self.bp.add_url_rule(f"{self.prefix}update/", view_func=self.update, methods=["PUT"])
+        self.bp.add_url_rule(f"{self.prefix}create/", view_func=self.create, methods=["GET", "POST"])
+        self.bp.add_url_rule(f"{self.prefix}edit/<int:id>", view_func=self.edit, methods=["GET", "POST"])
         self.bp.add_url_rule(f"{self.prefix}delete/<int:id>", view_func=self.delete, methods=["DELETE"])
 
     def get_all(self):
@@ -25,19 +24,26 @@ class AdminCategoryRoutes:
         return render_template(f"{self.prefix}view.html", category=category)
 
     def create(self):
-        return render_template(f"{self.prefix}create.html")
+        form = CategoryForm()
+        if form.validate_on_submit():
+            title = request.form["title"]
 
-    def insert(self):
-        title = request.form["title"]
+            category = Category(title=title)
+            db.session.add(category)
+            db.session.commit()
+            return redirect(self.prefix)
 
-        new_category = Category(title=title)
-        db.session.add(new_category)
-        db.session.commit()
-        return redirect(self.prefix)
+        return render_template(f"{self.prefix}create.html", form=form)
 
     def edit(self, id):
         category = Category.query.get(id)
-        return render_template(f"{self.prefix}edit.html", category=category)
+        form = CategoryForm()
+        if form.validate_on_submit():
+            category.title = request.form["title"]
+            db.session.commit()
+            return redirect(f"{self.prefix}{id}")
+
+        return render_template(f"{self.prefix}edit.html", category=category, form=form)
 
     def update(self):
         if request.method == "PUT":

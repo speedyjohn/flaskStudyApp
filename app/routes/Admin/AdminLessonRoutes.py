@@ -41,7 +41,6 @@ class AdminLessonRoutes:
     def edit(self, id):
         lesson = Lesson.query.get(id)
         form = fill_lesson_form_edit(LessonForm(), lesson)
-        print(form.category.choices)
         if form.validate_on_submit():
             lesson.title = request.form["title"]
             lesson.category_id = request.form["category"]
