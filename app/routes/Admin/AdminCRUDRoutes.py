@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 from flask import Blueprint, render_template, request, redirect, jsonify
 
 from app.forms.forms import CategoryForm, BaseForm
-from app.models import db, Category
+from app.models import db
 
 
 class AdminCRUDRoutes:
-    def __init__(self, bp: Blueprint, prefix: str, model: db.Model, form: BaseForm):
+    def __init__(self, bp: Blueprint, prefix: str, model: db.Model, form = BaseForm):
         self.bp = bp
         self.prefix = prefix
         self.model = model
@@ -21,17 +21,17 @@ class AdminCRUDRoutes:
 
     def get_all(self):
         rows = self.model.query.all()
-        return rows
+        return render_template(f"{self.prefix}index.html", rows=rows)
 
     def get(self, id):
         row = self.model.query.get(id)
         return render_template(f"{self.prefix}view.html", row=row)
 
-    def create(self, fill_func: None):
+    def create(self, fill_func=None):
         if fill_func is not None and callable(fill_func):
-            form = fill_func(self.form)
+            form = fill_func(self.form())
         else:
-            form = self.form
+            form = self.form()
 
         if form.validate_on_submit():
             params = {key: value for key, value in list(request.form.items())[1:-1]}
@@ -45,12 +45,12 @@ class AdminCRUDRoutes:
 
         return render_template(f"{self.prefix}create.html", form=form)
 
-    def edit(self, id, fill_func: None):
+    def edit(self, id, fill_func=None):
         row = self.model.query.get(id)
         if fill_func is not None and callable(fill_func):
-            form = fill_func(self.form)
+            form = fill_func(self.form())
         else:
-            form = CategoryForm()
+            form = self.form()
 
         if form.validate_on_submit():
             params = {key: value for key, value in list(request.form.items())[1:-1]}

@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <a href="{{ url_for('admin_categories.get_all') }}" class="fs-4">Все категории</a>
-            <p class="fs-3 mt-3">{{ category.title }}</p>
+            <p class="fs-3 mt-3">{{ row.title }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,17 +18,17 @@
                     <tbody>
                         <tr>
                             <td>ID</td>
-                            <td>{{ category.id }}</td>
+                            <td>{{ row.id }}</td>
                         </tr>
                         <tr>
                             <td>Название</td>
-                            <td>{{ category.title }}</td>
+                            <td>{{ row.title }}</td>
                         </tr>
                         <tr>
                             <td>CRUD</td>
                             <td class="d-flex gap-3">
-                                <a href="{{ url_for('admin_categories.edit', id=category.id) }}"><i class="fa-solid fa-pen"></i></a>
-                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteCat({{ category.id }})"><i class="fa-solid fa-trash"></i></button>
+                                <a href="{{ url_for('admin_categories.edit', id=row.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteCat({{ row.id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
