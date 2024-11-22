@@ -5,7 +5,7 @@
         {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
             {{ form.title.label(class="form-label") }}
-            {{ form.title(class="form-control", value=lesson.title) }}
+            {{ form.title(class="form-control", value=row.title) }}
             {% if form.title.errors %}
                 <div class="p-2 text-light bg-danger rounded-3">
                     {% for error in form.title.errors %}
@@ -15,22 +15,22 @@
             {% endif %}
         </div>
         <div class="mb-3 form-group">
-            {{ form.category.label(class="form-label") }}
-            {{ form.category(class="form-select") }}
-            {% if form.category.errors %}
+            {{ form.category_id.label(class="form-label") }}
+            {{ form.category_id(class="form-select") }}
+            {% if form.category_id.errors %}
                 <div class="p-2 text-light bg-danger rounded-3">
-                    {% for error in form.category.errors %}
+                    {% for error in form.category_id.errors %}
                         <p class="m-0 p-0">{{ error }}</p>
                     {% endfor %}
                 </div>
             {% endif %}
         </div>
         <div class="mb-3 form-group">
-            {{ form.level.label(class="form-label") }}
-            {{ form.level(class="form-select") }}
-            {% if form.level.errors %}
+            {{ form.level_id.label(class="form-label") }}
+            {{ form.level_id(class="form-select") }}
+            {% if form.level_id.errors %}
                 <div class="p-2 text-light bg-danger rounded-3">
-                    {% for error in form.level.errors %}
+                    {% for error in form.level_id.errors %}
                         <p class="m-0 p-0">{{ error }}</p>
                     {% endfor %}
                 </div>

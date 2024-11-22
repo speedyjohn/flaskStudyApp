@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <a href="{{ url_for('admin_lessons.get_all') }}" class="fs-4">Все уроки</a>
-            <p class="fs-3 mt-3">{{ lesson.title }}</p>
+            <p class="fs-3 mt-3">{{ row.title }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,25 +18,25 @@
                     <tbody>
                         <tr>
                             <td>ID</td>
-                            <td>{{ lesson.id }}</td>
+                            <td>{{ row.id }}</td>
                         </tr>
                         <tr>
                             <td>Название</td>
-                            <td>{{ lesson.title }}</td>
+                            <td>{{ row.title }}</td>
                         </tr>
                         <tr>
                             <td>Категория</td>
-                            <td><a href="{{ url_for('admin_categories.get', id=lesson.category.id) }}">ID: {{ lesson.category.id }} - {{ lesson.category.title }}</a></td>
+                            <td><a href="{{ url_for('admin_categories.get', id=row.category.id) }}">ID: {{ row.category.id }} - {{ row.category.title }}</a></td>
                         </tr>
                         <tr>
                             <td>Сложность</td>
-                            <td><a href="{{ url_for('admin_levels.get', id=lesson.level.id) }}">ID: {{ lesson.level.id }} - {{ lesson.level.title }}</a></td>
+                            <td><a href="{{ url_for('admin_levels.get', id=row.level.id) }}">ID: {{ row.level.id }} - {{ row.level.title }}</a></td>
                         </tr>
                         <tr>
                             <td>CRUD</td>
                             <td class="d-flex gap-3">
-                                <a href="{{ url_for('admin_lessons.edit', id=lesson.id) }}"><i class="fa-solid fa-pen"></i></a>
-                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLesson({{ lesson.id }})"><i class="fa-solid fa-trash"></i></button>
+                                <a href="{{ url_for('admin_lessons.edit', id=row.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLesson({{ row.id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

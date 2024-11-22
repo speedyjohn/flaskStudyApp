@@ -48,7 +48,7 @@ class AdminCRUDRoutes:
     def edit(self, id, fill_func=None):
         row = self.model.query.get(id)
         if fill_func is not None and callable(fill_func):
-            form = fill_func(self.form())
+            form = fill_func(self.form(), row)
         else:
             form = self.form()
 

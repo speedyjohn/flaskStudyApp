@@ -13,8 +13,8 @@ class BaseForm(FlaskForm):
 
 class LessonForm(BaseForm):
     title = StringField("Название", validators=[DataRequired(), Length(min=0, max=40)])
-    category = SelectField("Категория", validators=[DataRequired(), CategoryExists()])
-    level = SelectField("Сложность", validators=[DataRequired(), LevelExists()])
+    category_id = SelectField("Категория", validators=[DataRequired(), CategoryExists()])
+    level_id = SelectField("Сложность", validators=[DataRequired(), LevelExists()])
 
 
 class CategoryForm(BaseForm):
