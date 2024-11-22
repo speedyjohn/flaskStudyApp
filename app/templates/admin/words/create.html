@@ -43,11 +43,11 @@
             </div>
         </div>
         <div class="mb-3 form-group">
-            {{ form.lesson.label(class="form-label") }}
-            {{ form.lesson(class="form-select") }}
-            {% if form.lesson.errors %}
+            {{ form.lesson_id.label(class="form-label") }}
+            {{ form.lesson_id(class="form-select") }}
+            {% if form.lesson_id.errors %}
                 <div class="p-2 text-light bg-danger rounded-3">
-                    {% for error in form.lesson.errors %}
+                    {% for error in form.lesson_id.errors %}
                         <p class="m-0 p-0">{{ error }}</p>
                     {% endfor %}
                 </div>

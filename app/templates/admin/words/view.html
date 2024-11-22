@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <a href="{{ url_for('admin_words.get_all') }}" class="fs-4">Все слова</a>
-            <p class="fs-3 mt-3">{{ word.word }}</p>
+            <p class="fs-3 mt-3">{{ row.word }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,25 +18,25 @@
                     <tbody>
                         <tr>
                             <td>ID</td>
-                            <td>{{ word.id }}</td>
+                            <td>{{ row.id }}</td>
                         </tr>
                         <tr>
                             <td>Слово</td>
-                            <td>{{ word.word }}</td>
+                            <td>{{ row.word }}</td>
                         </tr>
                         <tr>
                             <td>Перевод</td>
-                            <td>{{ word.translation }}</td>
+                            <td>{{ row.translation }}</td>
                         </tr>
                         <tr>
                             <td>Урок</td>
-                            <td><a href="{{ url_for('admin_lessons.get', id=word.lesson.id) }}">ID: {{ word.lesson.id }} - {{ word.lesson.title }}</a></td>
+                            <td><a href="{{ url_for('admin_lessons.get', id=row.lesson.id) }}">ID: {{ row.lesson.id }} - {{ row.lesson.title }}</a></td>
                         </tr>
                         <tr>
                             <td>CRUD</td>
                             <td class="d-flex gap-3">
-                                <a href="{{ url_for('admin_words.edit', id=word.id) }}"><i class="fa-solid fa-pen"></i></a>
-                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteWord({{ word.id }})"><i class="fa-solid fa-trash"></i></button>
+                                <a href="{{ url_for('admin_words.edit', id=row.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteWord({{ row.id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

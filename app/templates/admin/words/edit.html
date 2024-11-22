@@ -5,7 +5,7 @@
         {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
             {{ form.word.label(class="form-label") }}
-            {{ form.word(class="form-control", value=word.word) }}
+            {{ form.word(class="form-control", value=row.word) }}
             {% if form.word.errors %}
                 <div class="p-2 text-light bg-danger rounded-3 mt-2">
                     {% for error in form.word.errors %}
@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3 form-group">
             {{ form.translation.label(class="form-label") }}
-            {{ form.translation(class="form-control", value=word.translation) }}
+            {{ form.translation(class="form-control", value=row.translation) }}
             {% if form.translation.errors %}
                 <div class="p-2 text-light bg-danger rounded-3 mt-2">
                     {% for error in form.translation.errors %}
