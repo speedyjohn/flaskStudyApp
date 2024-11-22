@@ -29,6 +29,6 @@ class LevelForm(BaseForm):
 class WordForm(BaseForm):
     word = StringField("Слово", validators=[Length(min=0, max=40)])
     translation = StringField("Перевод", validators=[Length(min=0, max=40)])
-    lesson = SelectField("Урок", validators=[DataRequired(), LessonExists()])
+    lesson_id = SelectField("Урок", validators=[DataRequired(), LessonExists()])
     many_rows = BooleanField("Множественный ввод", validators=[])
     words = TextAreaField("Множественный ввод", validators=[])

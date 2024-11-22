@@ -6,14 +6,35 @@
         <div class="mb-3 form-group" id="wordContainer">
             {{ form.word.label(class="form-label") }}
             {{ form.word(class="form-control") }}
+            {% if form.word.errors %}
+                <div class="p-2 text-light bg-danger rounded-3 mt-2">
+                    {% for error in form.word.errors %}
+                        <p class="m-0 p-0 mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group" id="translationContainer">
             {{ form.translation.label(class="form-label") }}
             {{ form.translation(class="form-control") }}
+            {% if form.translation.errors %}
+                <div class="p-2 text-light bg-danger rounded-3 mt-2">
+                    {% for error in form.translation.errors %}
+                        <p class="m-0 p-0 mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group d-none" id="wordsContainer">
             {{ form.words.label(class="form-label") }}
             {{ form.words(class="form-control") }}
+            {% if form.words.errors %}
+                <div class="p-2 text-light bg-danger rounded-3 mt-2">
+                    {% for error in form.words.errors %}
+                        <p class="m-0 p-0 mt-1">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         <div class="mb-3 form-group">
             <div class="form-check">
