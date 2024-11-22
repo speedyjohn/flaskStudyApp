@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <a href="{{ url_for('admin_levels.get_all') }}" class="fs-4">Все сложности</a>
-            <p class="fs-3 mt-3">{{ level.title }}</p>
+            <p class="fs-3 mt-3">{{ row.title }}</p>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -18,21 +18,21 @@
                     <tbody>
                         <tr>
                             <td>ID</td>
-                            <td>{{ level.id }}</td>
+                            <td>{{ row.id }}</td>
                         </tr>
                         <tr>
                             <td>Название</td>
-                            <td>{{ level.title }}</td>
+                            <td>{{ row.title }}</td>
                         </tr>
                         <tr>
                             <td>Показатель</td>
-                            <td>{{ level.indicator }}</td>
+                            <td>{{ row.indicator }}</td>
                         </tr>
                         <tr>
                             <td>CRUD</td>
                             <td class="d-flex gap-3">
-                                <a href="{{ url_for('admin_levels.edit', id=level.id) }}"><i class="fa-solid fa-pen"></i></a>
-                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLevel({{ level.id }})"><i class="fa-solid fa-trash"></i></button>
+                                <a href="{{ url_for('admin_levels.edit', id=row.id) }}"><i class="fa-solid fa-pen"></i></a>
+                                <button class="text-danger border-0 bg-transparent p-0" onclick="deleteLevel({{ row.id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>

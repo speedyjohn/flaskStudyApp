@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, jsonify
+from flask import Blueprint
 
 from app.forms.forms import CategoryForm
-from app.models import db, Category
+from app.models import Category
 from app.routes.Admin.AdminCRUDRoutes import AdminCRUDRoutes
 
 

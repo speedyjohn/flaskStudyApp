@@ -5,7 +5,7 @@
         {{ form.hidden_tag() }}
         <div class="mb-3 form-group">
             {{ form.title.label(class="form-label") }}
-            {{ form.title(class="form-control", value=level.title) }}
+            {{ form.title(class="form-control", value=row.title) }}
             {% if form.title.errors %}
                 <div class="p-2 text-light bg-danger rounded-3 mt-2">
                     {% for error in form.title.errors %}
@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3 form-group">
             {{ form.indicator.label(class="form-label") }}
-            {{ form.indicator(class="form-control", value=level.indicator) }}
+            {{ form.indicator(class="form-control", value=row.indicator) }}
             {% if form.indicator.errors %}
                 <div class="p-2 text-light bg-danger rounded-3 mt-2">
                     {% for error in form.indicator.errors %}
